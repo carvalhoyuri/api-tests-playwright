@@ -1,0 +1,25 @@
+{
+  "name": "api-tests-playwright",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:api": "npx playwright test --project api --config playwright.config.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carvalhoyuri/api-tests-playwright.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carvalhoyuri/api-tests-playwright/issues"
+  },
+  "homepage": "https://github.com/carvalhoyuri/api-tests-playwright#readme",
+  "devDependencies": {
+    "@faker-js/faker": "^7.4.0",
+    "@playwright/test": "^1.25.0",
+    "http-status-codes": "^2.2.0"
+  }
+}
