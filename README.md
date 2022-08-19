@@ -9,5 +9,7 @@ This is a sample project to study API test with [Playwright Framework.] (https:/
 
 
 ## Running the api tests
-
-- npm run test:api
+```
+ npm run test:api
+ 
+ ``` 
