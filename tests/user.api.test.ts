@@ -21,7 +21,7 @@ test.describe("User API", () => {
     expect(responseBody.message).toEqual("Cadastro realizado com sucesso");
   });
 
-  test.only("Should not allow to create a user with existent email", async ({
+  test("Should not allow to create a user with existent email", async ({
     request,
   }) => {
     const userData = generateUserData();
