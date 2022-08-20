@@ -32,4 +32,25 @@ test.describe("User API", () => {
     const responseBody = await response.json();
     expect(responseBody.message).toEqual("Este email já está sendo usado");
   });
+
+  test("Should return user data searching by id", async ({ request }) => {
+    const userData = generateUserData();
+    const response = await request.post("/usuarios", { data: userData });
+    expect(response.status()).toEqual(StatusCodes.CREATED);
+    const responseBody = await response.json();
+    const userId = responseBody._id;
+
+    const searchResponse = await request.get(`/usuarios/${userId}`);
+    //const searchResponseBody = await searchResponse.json();
+    expect(searchResponse.status()).toEqual(StatusCodes.OK);
+  });
+
+
+  test("Should fail when searching a user that does not exists", async ({request})=>{
+  const response =   await request.get('/usuarios/098qwe');
+  expect(response.status()).toEqual(StatusCodes.BAD_REQUEST);
+  const responseBody = await response.json();
+  await expect(responseBody.message).toEqual("Usuário não encontrado")
+
+  })
 });
