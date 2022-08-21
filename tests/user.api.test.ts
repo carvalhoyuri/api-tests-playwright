@@ -45,12 +45,22 @@ test.describe("User API", () => {
     expect(searchResponse.status()).toEqual(StatusCodes.OK);
   });
 
+  test("Should fail when searching a user that does not exists", async ({
+    request,
+  }) => {
+    const response = await request.get("/usuarios/098qwe");
+    expect(response.status()).toEqual(StatusCodes.BAD_REQUEST);
+    const responseBody = await response.json();
+    await expect(responseBody.message).toEqual("Usuário não encontrado");
+  });
 
-  test("Should fail when searching a user that does not exists", async ({request})=>{
-  const response =   await request.get('/usuarios/098qwe');
-  expect(response.status()).toEqual(StatusCodes.BAD_REQUEST);
-  const responseBody = await response.json();
-  await expect(responseBody.message).toEqual("Usuário não encontrado")
+  test("Should delete a user successfully", async ({ request }) => {
+    const userData = generateUserData();
+    const response = await request.post("/usuarios", { data: userData });
+    const responseBody = await response.json();
+    const userId = responseBody._id;
 
-  })
+    const deleteRequest = await request.delete(`usuarios/${userId}`);
+    expect(deleteRequest.status()).toEqual(StatusCodes.OK);
+  });
 });
